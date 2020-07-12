@@ -1,5 +1,6 @@
 package guru.springframework;
 
+import guru.springframework.config.DataSourceConfiguration;
 import guru.springframework.controllers.ConstructorInjectedController;
 import guru.springframework.controllers.GetterInjectedController;
 import guru.springframework.controllers.MyController;
@@ -13,16 +14,14 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"guru.services", "guru.springframework"})
 public class DiDemoApplication {
 
-	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(DiDemoApplication.class, args);
+    public static void main(String[] args) {
+        ApplicationContext ctx = SpringApplication.run(DiDemoApplication.class, args);
 
-		MyController controller = (MyController) ctx.getBean("myController");
+        MyController controller = (MyController) ctx.getBean("myController");
 
-		System.out.println(controller.hello());
-		System.out.println(ctx.getBean(PropertyInjectedController.class).sayHello());
-		System.out.println(ctx.getBean(GetterInjectedController.class).sayHello());
-		System.out.println(ctx.getBean(ConstructorInjectedController.class).sayHello());
+        DataSourceConfiguration dataSourceConfiguration = (DataSourceConfiguration) ctx.getBean("dataSourceConfiguration");
 
+        System.out.println(dataSourceConfiguration);
 
-	}
+    }
 }
